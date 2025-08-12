@@ -1,29 +1,29 @@
 import React, { useState } from "react"
 import axios from "axios"
 
+const axiosInstance = axios.create({
+    baseURL: 'http://localhost:3000',
+})
 const CreatePost = () => {
-    const [nome, setNome] = useState("")
+    const [name, setName] = useState("")
     const [email, setEmail] = useState("")
-    const [senha, setSenha] = useState("")
+    const [password, setPassword] = useState("")
     const [responseMessage, setResponseMessage] = useState("")
 
-    const handleSubmit = (event: { preventDefault: () => void }) => {
+
+
+
+    const handleSubmit = async (event: { preventDefault: () => void }) => {
         event.preventDefault()
 
         const newUser = {
-            nome,
+            name,
             email,
-            senha,
+            password,
         }
 
-        axios
-            .post("http://localhost:3000/api/v1/users", newUser)
-            .then((response) => {
-                setResponseMessage("User created successfully!");
-            })
-            .catch((err) => {
-                setResponseMessage("Error creating user");
-            });
+
+        await axiosInstance.post("/api/v1/users", newUser);
     };
 
     return (
@@ -33,8 +33,8 @@ const CreatePost = () => {
                 <input
                     type="text"
                     placeholder="Nome"
-                    value={nome}
-                    onChange={(e) => setNome(e.target.value)}
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                 />
                 <input
                     type="text"
@@ -44,8 +44,8 @@ const CreatePost = () => {
                 />
                 <textarea
                     placeholder="Senha"
-                    value={senha}
-                    onChange={(e) => setSenha(e.target.value)}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                 />
                 <button type="submit">Cadastrar usuário</button>
             </form>
