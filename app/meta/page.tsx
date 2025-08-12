@@ -1,52 +1,73 @@
-import React, { useState } from "react"
-import axios from "axios"
+'use client'
+import { useState } from "react";
+import { Input } from "@heroui/input";
+import { Button } from "@heroui/button";
 import client from "@/config/client";
 
-const CreatePost = () => {
-    const [name, setName] = useState("")
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
-    const [responseMessage, setResponseMessage] = useState("")
+export default function MetaPage() {
+    const [descricao, setDescricao] = useState("");
+    const [dataInicio, setDataInicio] = useState("");
+    const [dataFim, setDataFim] = useState("");
+    const [user, setUser] = useState("");
 
-    const handleSubmit = async (event: { preventDefault: () => void }) => {
-        event.preventDefault()
+    const handleSubmit = async (event) => {
+        event.preventDefault();
 
-        const newUser = {
-            name,
-            email,
-            password,
-        }
+        const novaMeta = {
+            descricao,
+            dataInicio,
+            dataFim,
+            user
+        };
 
-
-        await client.post("/api/v1/users", newUser);
+        await client.post("/metas", novaMeta);
     };
 
     return (
-        <div>
-            <h2>Ciar novo usuário</h2>
+        <div className="w-full flex flex-col gap-4">
             <form onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    placeholder="Nome"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                />
-                <input
-                    type="text"
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                />
-                <textarea
-                    placeholder="Senha"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-                <button type="submit">Cadastrar usuário</button>
+                <div className="flex w-full flex-wrap md:flex-nowrap mb-6 md:mb-0 gap-4">
+                    <Input
+                        label="Descrição"
+                        type="text"
+                        variant="bordered"
+                        value={descricao}
+                        onChange={(e) => setDescricao(e.target.value)}
+                    />
+                </div>
+                <div className="flex w-full flex-wrap md:flex-nowrap mb-6 md:mb-0 gap-4">
+                    <Input
+                        label="Data de início"
+                        type="date"
+                        variant="bordered"
+                        value={dataInicio}
+                        onChange={(e) => setDataInicio(e.target.value)}
+                    />
+                </div>
+                <div className="flex w-full flex-wrap md:flex-nowrap mb-6 md:mb-0 gap-4">
+                    <Input
+                        label="Data de término"
+                        type="date"
+                        variant="bordered"
+                        value={dataFim}
+                        onChange={(e) => setDataFim(e.target.value)}
+                    />
+                </div>
+                <div className="flex w-full flex-wrap md:flex-nowrap mb-6 md:mb-0 gap-4">
+                    <Input
+                        label="Usuário"
+                        type="number"
+                        variant="bordered"
+                        value={user}
+                        onChange={(e) => setUser(e.target.value)}
+                    />
+                </div>
+                <div className="flex flex-wrap gap-4 items-center">
+                    <Button type="submit" color="default">
+                        Default
+                    </Button>
+                </div>
             </form>
-            {responseMessage && <p>{responseMessage}</p>}
         </div>
     );
-};
-
-export default CreatePost;
+}
