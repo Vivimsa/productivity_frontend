@@ -1,43 +1,52 @@
-'use client'
-import {Button} from "@heroui/react"
-import {Input} from "@heroui/react"
 import React, { useState } from "react"
-import client from "@/config/client"
-import {useNavigate} from "react-router-dom"
-import {useRouter} from "next/navigation";
+import axios from "axios"
+import client from "@/config/client";
 
-export default function LoginPage() {
-    const sizes = ["lg"];
+const CreatePost = () => {
+    const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const route = useRouter()
-
+    const [responseMessage, setResponseMessage] = useState("")
 
     const handleSubmit = async (event: { preventDefault: () => void }) => {
         event.preventDefault()
-        const user = {
+
+        const newUser = {
+            name,
             email,
             password,
         }
 
-        const loginResponse = await client.post("/auth/login", user)
-        console.log(loginResponse)
-        route.push("/usuario/cadastro")
-   }
+
+        await client.post("/api/v1/users", newUser);
+    };
 
     return (
         <div>
-            <div className="flex flex-wrap gap-4 items-center">
-                <Button color="primary" variant="bordered" type="submit">
-                    Cadastrar meta
-                </Button>
-                <Button color="primary" variant="bordered" type="submit">
-                    Cadastrar tarefa
-                </Button>
-            </div>
+            <h2>Ciar novo usuário</h2>
+            <form onSubmit={handleSubmit}>
+                <input
+                    type="text"
+                    placeholder="Nome"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                />
+                <input
+                    type="text"
+                    placeholder="Email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                />
+                <textarea
+                    placeholder="Senha"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+                <button type="submit">Cadastrar usuário</button>
+            </form>
+            {responseMessage && <p>{responseMessage}</p>}
         </div>
-    )
-}
+    );
+};
 
-
-
+export default CreatePost;
