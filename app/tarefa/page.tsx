@@ -1,43 +1,95 @@
 'use client'
-import {Button} from "@heroui/react"
-import {Input} from "@heroui/react"
-import React, { useState } from "react"
-import client from "@/config/client"
-import {useNavigate} from "react-router-dom"
-import {useRouter} from "next/navigation";
 
-export default function LoginPage() {
-    const sizes = ["lg"];
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
-    const route = useRouter()
+import {useState} from "react";
+import client from "@/config/client";
+import {Input} from "@heroui/input";
+import {Button} from "@heroui/button";
 
+export default function CadastrarTarefa() {
+    const [descricao, setDescricao] = useState("");
+    const [registro_tempo, setRegistroTempo] = useState("");
+    const [data_inicio, setDataInicio] = useState("");
+    const [data_fim, setDataFim] = useState("");
+    const [metaId, setMetaId] = useState("");
+    const [userId, setUserId] = useState("");
 
-    const handleSubmit = async (event: { preventDefault: () => void }) => {
-        event.preventDefault()
-        const user = {
-            email,
-            password,
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        const novaTarefa = {
+            descricao,
+            registro_tempo,
+            data_inicio,
+            data_fim,
+            metaId,
+            userId
+        };
+
+        try {
+            await client.post("http://localhost:3000/tarefa", novaTarefa);
+            alert("Tarefa cadastrada com sucesso!");
+        } catch (error) {
+            console.error("Erro ao cadastrar tarefa:", error);
+            alert("Falha ao cadastrar tarefa");
         }
-
-        const loginResponse = await client.post("/auth/login", user)
-        console.log(loginResponse)
-        route.push("/usuario/cadastro")
-   }
+    };
 
     return (
-        <div>
-            <div className="flex flex-wrap gap-4 items-center">
-                <Button color="primary" variant="bordered" type="submit">
-                    Cadastrar meta
-                </Button>
-                <Button color="primary" variant="bordered" type="submit">
-                    Cadastrar tarefa
-                </Button>
-            </div>
-        </div>
-    )
+        <form
+            onSubmit={handleSubmit}
+            className="flex flex-col gap-4 max-w-md mx-auto"
+        >
+            <Input
+                label="Descrição"
+                type="text"
+                variant="bordered"
+                value={descricao}
+                onChange={(e) => setDescricao(e.target.value)}
+            />
+
+            <Input
+                label="Registro tempo"
+                type="text"
+                variant="bordered"
+                value={registro_tempo}
+                onChange={(e) => setRegistroTempo(e.target.value)}
+            />
+
+            <Input
+                label="Data de início"
+                type="date"
+                variant="bordered"
+                value={data_inicio}
+                onChange={(e) => setDataInicio(e.target.value)}
+            />
+
+            <Input
+                label="Data de término"
+                type="date"
+                variant="bordered"
+                value={data_fim}
+                onChange={(e) => setDataFim(e.target.value)}
+            />
+
+            <Input
+                label="Meta"
+                type="number"
+                variant="bordered"
+                value={metaId}
+                onChange={(e) => setMetaId(e.target.value)}
+            />
+
+            <Input
+                label="Usuário"
+                type="number"
+                variant="bordered"
+                value={userId}
+                onChange={(e) => setUserId(e.target.value)}
+            />
+
+            <Button type="submit" color="primary">
+                Cadastrar Tarefa
+            </Button>
+        </form>
+    );
 }
-
-
-

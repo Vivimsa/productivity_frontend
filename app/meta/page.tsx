@@ -1,13 +1,13 @@
 'use client'
-import { useState } from "react";
-import { Input } from "@heroui/input";
-import { Button } from "@heroui/button";
+import {useState} from "react";
+import {Input} from "@heroui/input";
+import {Button} from "@heroui/button";
 import client from "@/config/client";
 
 export default function MetaPage() {
     const [descricao, setDescricao] = useState("");
-    const [dataInicio, setDataInicio] = useState("");
-    const [dataFim, setDataFim] = useState("");
+    const [data_inicio, setDataInicio] = useState("");
+    const [data_fim, setDataFim] = useState("");
     const [user, setUser] = useState("");
 
     const handleSubmit = async (event) => {
@@ -15,8 +15,8 @@ export default function MetaPage() {
 
         const novaMeta = {
             descricao,
-            dataInicio,
-            dataFim,
+            data_inicio,
+            data_fim,
             user
         };
 
@@ -40,7 +40,7 @@ export default function MetaPage() {
                         label="Data de início"
                         type="date"
                         variant="bordered"
-                        value={dataInicio}
+                        value={data_inicio}
                         onChange={(e) => setDataInicio(e.target.value)}
                     />
                 </div>
@@ -49,7 +49,7 @@ export default function MetaPage() {
                         label="Data de término"
                         type="date"
                         variant="bordered"
-                        value={dataFim}
+                        value={data_fim}
                         onChange={(e) => setDataFim(e.target.value)}
                     />
                 </div>

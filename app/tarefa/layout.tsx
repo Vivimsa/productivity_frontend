@@ -9,5 +9,5 @@ export default function BlogLayout({
         {children}
       </div>
     </section>
-  );
+  )
 }
