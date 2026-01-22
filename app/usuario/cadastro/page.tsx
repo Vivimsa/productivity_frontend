@@ -1,7 +1,6 @@
 'use client'
-import {Button} from "@heroui/react";
-import {Input} from "@heroui/react"
-import React, { useState } from "react"
+import {Button, Input} from "@heroui/react";
+import React, {useState} from "react"
 import client from "@/config/client";
 
 export default function CadastroPage() {
@@ -21,7 +20,7 @@ export default function CadastroPage() {
         }
 
 
-        await client.post("/api/v1/users", newUser);
+        await client.post("/api/user", newUser);
     };
 
     return (

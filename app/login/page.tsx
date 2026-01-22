@@ -1,9 +1,7 @@
 'use client'
-import {Button} from "@heroui/react"
-import {Input} from "@heroui/react"
-import React, { useState } from "react"
+import {Button, Input} from "@heroui/react"
+import React, {useState} from "react"
 import client from "@/config/client"
-import {useNavigate} from "react-router-dom"
 import {useRouter} from "next/navigation";
 
 export default function LoginPage() {
@@ -20,7 +18,7 @@ export default function LoginPage() {
             password,
         }
 
-        const loginResponse = await client.post("/auth/login", user)
+        const loginResponse = await client.post("/api/login", user)
         console.log(loginResponse)
         route.push("/home")
    }

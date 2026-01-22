@@ -29,8 +29,8 @@ export default function CadastrarTarefa() {
             await client.post("http://localhost:3000/tarefa", novaTarefa);
             alert("Tarefa cadastrada com sucesso!");
         } catch (error) {
-            console.error("Erro ao cadastrar tarefa:", error);
-            alert("Falha ao cadastrar tarefa");
+            console.error("Erro ao cadastrar cadastrarTarefa:", error);
+            alert("Falha ao cadastrar cadastrarTarefa");
         }
     };
 
