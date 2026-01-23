@@ -19,7 +19,8 @@ export default function LoginPage() {
         }
 
         const loginResponse = await client.post("/api/login", user)
-        console.log(loginResponse)
+        const token = loginResponse.data.data.token
+        localStorage.setItem("token", token)
         route.push("/home")
    }
 
@@ -40,7 +41,6 @@ export default function LoginPage() {
                     </Button>
                 </div>
             </form>
-
         </div>
     )
 }
