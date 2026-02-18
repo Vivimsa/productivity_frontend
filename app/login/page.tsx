@@ -19,7 +19,7 @@ export default function LoginPage() {
         }
 
         const loginResponse = await client.post("/api/login", user)
-        const token = loginResponse.data.data.token
+        const token = loginResponse.data.data.token || loginResponse.data.token
         localStorage.setItem("token", token)
         route.push("/home")
    }
