@@ -6,23 +6,23 @@ import {Input} from "@heroui/input";
 import {Button} from "@heroui/button";
 
 export default function CadastrarTarefa() {
+    const [titulo, setTitulo] = useState("");
     const [descricao, setDescricao] = useState("");
-    const [registro_tempo, setRegistroTempo] = useState("");
-    const [data_inicio, setDataInicio] = useState("");
-    const [data_fim, setDataFim] = useState("");
-    const [metaId, setMetaId] = useState("");
-    const [userId, setUserId] = useState("");
+    const [concluida_em, setConcluidaEm] = useState("");
+    const [data_expiracao, setDataExpiracao] = useState("");
+    const [status, setStatus] = useState("");
+    const [meta_id, setMetaId] = useState("");
 
     const handleSubmit = async (event) => {
         event.preventDefault();
 
         const novaTarefa = {
+            titulo,
             descricao,
-            registro_tempo,
-            data_inicio,
-            data_fim,
-            metaId,
-            userId
+            concluida_em,
+            data_expiracao,
+            status,
+            meta_id: parseInt(meta_id),
         };
 
         try {
@@ -40,7 +40,15 @@ export default function CadastrarTarefa() {
             className="flex flex-col gap-4 max-w-md mx-auto"
         >
             <Input
-                label="Descrição"
+                label="Título:"
+                type="text"
+                variant="bordered"
+                value={titulo}
+                onChange={(e) => setTitulo(e.target.value)}
+            />
+
+            <Input
+                label="Descrição:"
                 type="text"
                 variant="bordered"
                 value={descricao}
@@ -48,43 +56,35 @@ export default function CadastrarTarefa() {
             />
 
             <Input
-                label="Registro tempo"
+                label="Concluída em:"
+                type="date"
+                variant="bordered"
+                value={concluida_em}
+                onChange={(e) => setConcluidaEm(e.target.value)}
+            />
+
+            <Input
+                label="Data de Expiração"
+                type="date"
+                variant="bordered"
+                value={data_expiracao}
+                onChange={(e) => setDataExpiracao(e.target.value)}
+            />
+
+            <Input
+                label="Status"
                 type="text"
                 variant="bordered"
-                value={registro_tempo}
-                onChange={(e) => setRegistroTempo(e.target.value)}
-            />
-
-            <Input
-                label="Data de início"
-                type="date"
-                variant="bordered"
-                value={data_inicio}
-                onChange={(e) => setDataInicio(e.target.value)}
-            />
-
-            <Input
-                label="Data de término"
-                type="date"
-                variant="bordered"
-                value={data_fim}
-                onChange={(e) => setDataFim(e.target.value)}
+                value={status}
+                onChange={(e) => setStatus(e.target.value)}
             />
 
             <Input
                 label="Meta"
                 type="number"
                 variant="bordered"
-                value={metaId}
+                value={meta_id}
                 onChange={(e) => setMetaId(e.target.value)}
-            />
-
-            <Input
-                label="Usuário"
-                type="number"
-                variant="bordered"
-                value={userId}
-                onChange={(e) => setUserId(e.target.value)}
             />
 
             <Button type="submit" color="primary">
