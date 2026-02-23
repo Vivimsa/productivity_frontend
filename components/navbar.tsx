@@ -28,7 +28,7 @@ export const Navbar = () => {
 
     const handleLogout = () => {
         if (typeof window !== "undefined") {
-            localStorage.removeItem('token');
+            localStorage.removeItem('access_token');
             router.push('/login');
             router.refresh();
         }
