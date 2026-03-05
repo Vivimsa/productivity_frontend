@@ -9,7 +9,8 @@ export default function ListagemMetas(){
     const [metas,setMetas] = useState([])
     const listagemMetas= async () => {
         const response = await client.get('/api/metas')
-        setMetas(response.data || [])
+        setMetas(response.data?.data || response.data || [])
+        console.log(metas)
     }
 
     useEffect (() => {
