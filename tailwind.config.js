@@ -13,6 +13,13 @@ const config = {
         sans: ["var(--font-sans)"],
         mono: ["var(--font-mono)"],
       },
+      colors:{
+        "roxo": "#BF49B7",
+        "azul1": "#56208C",
+        "azul2": "#583BBF",
+        "azul3": "#91B2F2",
+        "azul4": "#BDCFF2",
+      }
     },
   },
   darkMode: "class",
