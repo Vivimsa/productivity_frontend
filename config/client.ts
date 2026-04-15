@@ -26,7 +26,7 @@ client.interceptors.request.use(
 client.interceptors.response.use(
   (response) => {
     if (response.status === 401 && !window.location.href.includes('/login')) {
-      localStorage.removeItem('access_token')
+      localStorage.removeItem('token')
       window.location.href = '/login'
     }
     return response
@@ -41,7 +41,7 @@ client.interceptors.response.use(
         error.response.status === 401 &&
         !window.location.href.includes('/login')
       ) {
-        localStorage.removeItem('access_token')
+        localStorage.removeItem('token')
         window.location.href = '/login'
       }
     } else if (error.request) {

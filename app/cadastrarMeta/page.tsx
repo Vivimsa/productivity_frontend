@@ -30,7 +30,7 @@ export default function MetaPage() {
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <div>
           <MeuInput
-            label="Título"
+            label="Título *"
             type="text"
             variant="bordered"
             value={titulo}
@@ -57,7 +57,7 @@ export default function MetaPage() {
         </div>
         <div>
           <MeuInput
-            label="Data expiração"
+            label="Data expiração *"
             type="date"
             variant="bordered"
             value={data_expiracao}
